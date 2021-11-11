@@ -1,0 +1,40 @@
+{
+  "combos": [
+    {
+      "title": "Cógela Suave",
+      "desc": "10 butis + 1 bollo + limón + pimienta + picante",
+      "price": "6000",
+      "img": "https://hartoebuti.herokuapp.com/assets/cogela-suave.jpg"
+    },
+    {
+      "title": "Visajoso",
+      "desc": "15 butis + 2 bollos + limón + pimienta + picante",
+      "price": "8000",
+      "img": "https://hartoebuti.herokuapp.com/assets/visajoso.jpg"
+    },
+    {
+      "title": "Mi Amor Te Quiero",
+      "desc": "10 butis + 2 bollos + 5 patacones + 3 chorizos + limón + pimienta + picante",
+      "price": "10000",
+      "img": "https://hartoebuti.herokuapp.com/assets/mi-amor.jpg"
+    },
+    {
+      "title": "Espeluque",
+      "desc": "20 butis + 2 bollos + 5 patacones + limón + pimienta + picante",
+      "price": "13000",
+      "img": "https://hartoebuti.herokuapp.com/assets/espeluque.jpg"
+    },
+    {
+      "title": "Barrejobo",
+      "desc": "30 butis + 2 bollos + 10 patacones + 5 chorizos + limón + pimienta + picante",
+      "price": "22000",
+      "img": "https://hartoebuti.herokuapp.com/assets/barrejobo.jpg"
+    },
+    {
+      "title": "Catapila",
+      "desc": "50 butis + 4 bollos + 20 patacones + 10 chorizos + limón + pimienta + picante",
+      "price": "30000",
+      "img": "https://hartoebuti.herokuapp.com/assets/catapila.jpg"
+    }
+  ]
+}

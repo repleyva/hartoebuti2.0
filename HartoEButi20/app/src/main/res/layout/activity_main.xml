@@ -1,165 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<layout>
 
-    <ScrollView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <!-- start header -->
-            <LinearLayout
-                android:id="@+id/header"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:src="@drawable/logo" />
-
+                <!-- start header -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/logo" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="¡Buti, buti, buti!"
-                        android:textColor="@color/second_color"
-                        android:textSize="18sp" />
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="Harto E' Buti"
-                        android:textColor="@color/primary_color"
-                        android:textSize="@dimen/titles"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="¡Buti, buti, buti!"
+                            android:textColor="@color/second_color"
+                            android:textSize="18sp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="Harto E' Buti"
+                            android:textColor="@color/primary_color"
+                            android:textSize="@dimen/titles"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/cart_logo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.466">
+
+                        </ImageView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
+                <!-- end header -->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!-- start Wellcome message -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/opciones"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="140dp"
+                    android:layout_below="@+id/header"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/main_color"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/cart_logo"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.466">
-
-                    </ImageView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-            <!-- end header -->
-
-            <!-- start Wellcome message -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/opciones"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_below="@+id/header"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@color/main_color"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center"
-                        android:text="¡Bievenidos a HartoE´ButiApp, desde esta aplicación podremos agilizar la toma de pedidos y una mejor atención a ustedes, nuestros clientes!"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text"
-                        android:textStyle="bold" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:text="Menú Butístico"
-                        android:gravity="center"
-                        android:background="@drawable/view_rounded"
-                        android:textColor="@color/primary_color"
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <!-- end Wellcome message -->
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
 
-            <!-- start separator combos-->
-            <LinearLayout
-                android:id="@+id/lineaPedidos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/opciones"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:weightSum="12">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:text="¡Bievenidos a HartoE´ButiApp, desde esta aplicación podremos agilizar la toma de pedidos y una mejor atención a ustedes, nuestros clientes!"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text"
+                            android:textStyle="bold" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="3"
-                    android:background="@color/second_color" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:background="@drawable/view_rounded"
+                            android:gravity="center"
+                            android:text="Menú Butístico"
+                            android:textColor="@color/primary_color"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- end Wellcome message -->
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- start separator combos-->
+                <LinearLayout
+                    android:id="@+id/line_separator"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_below="@+id/opciones"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:text="Pedidos"
-                    android:textAlignment="center"
-                    android:textColor="@color/second_color"
-                    android:textSize="15sp" />
+                    android:weightSum="12">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="3"
-                    android:background="@color/second_color" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:background="@color/second_color" />
 
-            </LinearLayout>
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:text="Pedidos"
+                        android:textAlignment="center"
+                        android:textColor="@color/second_color"
+                        android:textSize="15sp" />
 
-    </ScrollView>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:background="@color/second_color" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <!-- Orders -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line_separator"
+                    android:layout_marginTop="@dimen/text">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
