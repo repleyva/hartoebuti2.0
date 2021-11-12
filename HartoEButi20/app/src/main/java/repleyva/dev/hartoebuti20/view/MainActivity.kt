@@ -1,4 +1,4 @@
-package repleyva.dev.hartoebuti20
+package repleyva.dev.hartoebuti20.view
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     /*
     * TODO:
-    *  - Idear El carrito de compras e implementar el touch para cada tarjeta
+    *  - implementar navigation
+    *  - Ver crrito de compras
     *  */
 
     lateinit var binding: ActivityMainBinding
