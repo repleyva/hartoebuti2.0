@@ -109,8 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getDataApi() {
-        val apiInterface = ApiInterface.create().getOrders("combos.json")
-
+        val apiInterface = ApiInterface.getInstance().create().getOrders("combos.json")
         //apiInterface.enqueue( Callback<List<Movie>>())
         apiInterface.enqueue(object : Callback<ArrayList<OrderData>> {
             override fun onResponse(

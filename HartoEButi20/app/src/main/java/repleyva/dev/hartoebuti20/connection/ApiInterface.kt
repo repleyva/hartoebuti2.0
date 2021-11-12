@@ -10,11 +10,21 @@ import retrofit2.http.Path
 interface ApiInterface {
 
     @GET("{pedido}")
-    fun getOrders(@Path("pedido") pedido: String) : Call<ArrayList<OrderData>>
+    fun getOrders(@Path("pedido") pedido: String): Call<ArrayList<OrderData>>
 
     companion object {
+
         var BASE_URL = "http://192.168.38.244/api/"
-        fun create() : ApiInterface {
+        private var INSTANCE = ApiInterface
+
+        fun getInstance(): Companion {
+            if (INSTANCE == null) {
+                INSTANCE = ApiInterface
+            }
+            return INSTANCE
+        }
+
+        fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
