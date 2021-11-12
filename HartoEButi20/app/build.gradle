@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
+    implementation "androidx.compose.runtime:runtime-livedata:1.1.0-beta02"
 
     // para las llamadas a la api
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -62,4 +63,7 @@ dependencies {
 
     // para las imagenes
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+    // In charge of setContent
+    implementation "androidx.activity:activity-compose:1.4.0"
 }

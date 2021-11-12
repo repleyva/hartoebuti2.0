@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import repleyva.dev.hartoebuti20.adapters.RecyclerViewAdapter
-import repleyva.dev.hartoebuti20.api.ApiFake.Companion.getData
 import repleyva.dev.hartoebuti20.connection.ApiInterface
+import repleyva.dev.hartoebuti20.connection.ConnectionLiveData
 import repleyva.dev.hartoebuti20.databinding.ActivityMainBinding
 import repleyva.dev.hartoebuti20.model.OrderData
 import retrofit2.Call
@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var manager: RecyclerView.LayoutManager
 
+    // para chequear si hay coneccion a internet
+    lateinit var connectionLiveData: ConnectionLiveData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -40,7 +43,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         manager = LinearLayoutManager(this)
 
-        if (testConnectionInternet(this)) {
+        connectionLiveData = ConnectionLiveData(this)
+
+        connectionLiveData.observe(this, { isNetworkAvailable ->
+            onlineStatus(isNetworkAvailable)
+        })
+
+        if (!testConnectionInternet(this)) {
+            Toast.makeText(
+                this,
+                "Compruebe su conexión a Internet",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    fun onlineStatus(status: Boolean) {
+        if (status) {
             binding.progressLinear.setVisibility(View.VISIBLE);
             getDataApi()
         } else {
