@@ -26,12 +26,12 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/ivImg"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/logo" />
+                    app:loadImage="@{listItem.img}"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

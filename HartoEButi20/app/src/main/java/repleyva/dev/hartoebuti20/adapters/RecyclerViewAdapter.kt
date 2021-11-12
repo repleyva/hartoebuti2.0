@@ -2,7 +2,11 @@ package repleyva.dev.hartoebuti20.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import repleyva.dev.hartoebuti20.R
 import repleyva.dev.hartoebuti20.databinding.ItemOrderBinding
 import repleyva.dev.hartoebuti20.model.OrderData
 
@@ -27,5 +31,19 @@ class RecyclerViewAdapter(private val data: ArrayList<OrderData>) :
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("loadImage")
+        fun loadImage(thubmImage: ImageView, url: String) {
+            Glide.with(thubmImage)
+                .load(url)
+                .circleCrop()
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .fallback(R.drawable.ic_launcher_foreground)
+                .into(thubmImage)
+        }
     }
 }
