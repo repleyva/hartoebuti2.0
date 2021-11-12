@@ -1,5 +1,8 @@
 package repleyva.dev.hartoebuti20
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,11 +34,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         manager = LinearLayoutManager(this)
 
-        getDataApi()
+        if (testConnectionInternet(this)) {
+            binding.progressLinear.setVisibility(View.VISIBLE);
+            getDataApi()
+        } else {
+            Toast.makeText(
+                this,
+                "Compruebe su conexión a Internet",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    fun testConnectionInternet(context: Context): Boolean {
+        var connected = false
+        val connec = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // Recupera todas las redes (tanto móviles como wifi)
+        val redes = connec.allNetworkInfo
+        for (i in redes.indices) {
+            // Si alguna red tiene conexión, se devuelve true
+            if (redes[i].state == NetworkInfo.State.CONNECTED) {
+                connected = true
+            }
+        }
+        return connected
     }
 
     fun getDataApi() {
-        val apiInterface = ApiInterface.create().getOrders()
+        val apiInterface = ApiInterface.create().getOrders("combos.json")
 
         //apiInterface.enqueue( Callback<List<Movie>>())
         apiInterface.enqueue(object : Callback<ArrayList<OrderData>> {
@@ -44,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<ArrayList<OrderData>>?
             ) {
                 if (response?.body() != null) {
+                    binding.progressLinear.setVisibility(View.GONE);
                     binding.recyclerOrders.apply {
                         adapter = RecyclerViewAdapter(response.body()!!)
                         layoutManager = manager
@@ -53,6 +81,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ArrayList<OrderData>>?, t: Throwable?) {
                 if (t != null) {
+                    binding.progressLinear.setVisibility(View.GONE);
                     Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
                 }
             }

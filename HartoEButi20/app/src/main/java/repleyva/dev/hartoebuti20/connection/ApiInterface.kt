@@ -5,13 +5,15 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiInterface {
-    @GET("db.json")
-    fun getOrders() : Call<ArrayList<OrderData>>
+
+    @GET("{pedido}")
+    fun getOrders(@Path("pedido") pedido: String) : Call<ArrayList<OrderData>>
 
     companion object {
-        var BASE_URL = "http://192.168.101.7/api/"
+        var BASE_URL = "http://192.168.72.244/api/"
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

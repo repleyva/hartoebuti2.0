@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:gravity="center"
-                    android:text="Pedidos"
+                    android:text="Combos"
                     android:textAlignment="center"
                     android:textColor="@color/second_color"
                     android:textSize="15sp" />
@@ -157,6 +157,38 @@
                     android:layout_gravity="center"
                     android:layout_weight="3"
                     android:background="@color/second_color" />
+
+            </LinearLayout>
+
+            <!--Progress-->
+            <LinearLayout
+                android:layout_below="@+id/line_separator"
+                android:layout_marginTop="@dimen/text"
+                android:id="@+id/progress_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buscando combos, espere...">
+
+                </TextView>
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circular_bar"
+                    android:paddingTop="20dp"
+                    android:progress="50"
+                    android:progressDrawable="@drawable/circular_bar">
+
+                </ProgressBar>
 
             </LinearLayout>
 
