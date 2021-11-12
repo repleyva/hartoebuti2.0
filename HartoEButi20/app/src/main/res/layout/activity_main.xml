@@ -12,6 +12,24 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btnCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/main_color"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:icon="@drawable/cart_logo"
+            app:iconGravity="start"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp">
+
+        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

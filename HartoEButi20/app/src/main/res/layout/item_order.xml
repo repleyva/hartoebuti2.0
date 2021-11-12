@@ -12,7 +12,7 @@
         android:animateLayoutChanges="true"
         app:cardBackgroundColor="@color/card_color"
         app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
+        app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
 
         <!--Item-->
@@ -31,7 +31,7 @@
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:layout_margin="10dp"
-                    app:loadImage="@{listItem.img}"/>
+                    app:loadImage="@{listItem.img}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,6 +68,14 @@
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/prices"
                         android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnComprar"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:backgroundTint="@color/main_color"
+                        android:text="comprar"></Button>
 
                 </LinearLayout>
             </LinearLayout>

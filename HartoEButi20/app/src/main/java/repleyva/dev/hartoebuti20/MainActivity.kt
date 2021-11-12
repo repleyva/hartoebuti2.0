@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import repleyva.dev.hartoebuti20.adapters.RecyclerViewAdapter
@@ -15,15 +16,18 @@ import repleyva.dev.hartoebuti20.connection.ApiInterface
 import repleyva.dev.hartoebuti20.connection.ConnectionLiveData
 import repleyva.dev.hartoebuti20.databinding.ActivityMainBinding
 import repleyva.dev.hartoebuti20.model.OrderData
+import repleyva.dev.hartoebuti20.viewmodel.OrderViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import androidx.lifecycle.Observer
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     /*
     * TODO:
-    *  - Imprementar LiveData para observar cuando cambie la coneccion de internet
     *  - Idear El carrito de compras e implementar el touch para cada tarjeta
     *  */
 
@@ -32,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
     // para chequear si hay coneccion a internet
     lateinit var connectionLiveData: ConnectionLiveData
+
+    // inspeccionar el pedido
+    private val orderViewModel: OrderViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         manager = LinearLayoutManager(this)
 
         connectionLiveData = ConnectionLiveData(this)
-
         connectionLiveData.observe(this, { isNetworkAvailable ->
             onlineStatus(isNetworkAvailable)
         })
@@ -56,9 +62,25 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+
+        binding.btnCart.shrink()
+
+        orderViewModel.order.observe(this, Observer {
+            binding.btnCart.text = "(hacer pedido) x1 ${it?.title}"
+            binding.btnCart.extend()
+        })
+
+        binding.btnCart.setOnClickListener {
+            if (binding.btnCart.isExtended) {
+                binding.btnCart.shrink()
+            } else {
+                binding.btnCart.extend()
+            }
+        }
+
     }
 
-    fun onlineStatus(status: Boolean) {
+    private fun onlineStatus(status: Boolean) {
         if (status) {
             binding.progressLinear.setVisibility(View.VISIBLE);
             getDataApi()
@@ -71,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun testConnectionInternet(context: Context): Boolean {
+    private fun testConnectionInternet(context: Context): Boolean {
         var connected = false
         val connec = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -86,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         return connected
     }
 
-    fun getDataApi() {
+    private fun getDataApi() {
         val apiInterface = ApiInterface.create().getOrders("combos.json")
 
         //apiInterface.enqueue( Callback<List<Movie>>())
@@ -97,10 +119,9 @@ class MainActivity : AppCompatActivity() {
             ) {
                 if (response?.body() != null) {
                     binding.progressLinear.setVisibility(View.GONE);
-                    binding.recyclerOrders.apply {
-                        adapter = RecyclerViewAdapter(response.body()!!)
-                        layoutManager = manager
-                    }
+                    binding.recyclerOrders.adapter =
+                        RecyclerViewAdapter(response.body()!!, binding, orderViewModel)
+                    binding.recyclerOrders.layoutManager = manager
                 }
             }
 
