@@ -21,6 +21,12 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    /*
+    * TODO:
+    *  - Imprementar LiveData para observar cuando cambie la coneccion de internet
+    *  - Idear El carrito de compras e implementar el touch para cada tarjeta
+    *  */
+
     lateinit var binding: ActivityMainBinding
     lateinit var manager: RecyclerView.LayoutManager
 
