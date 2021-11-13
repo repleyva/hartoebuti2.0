@@ -1,23 +1,23 @@
 package repleyva.dev.hartoebuti20.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import repleyva.dev.hartoebuti20.R
 import repleyva.dev.hartoebuti20.databinding.ActivityCartBinding
-import repleyva.dev.hartoebuti20.viewmodel.OrderViewModel
+import repleyva.dev.hartoebuti20.helpers.MathOperations
 
 class CartActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityCartBinding
+    var count: Int = 1
 
-    // inspeccionar el pedido
-    private val orderViewModel: OrderViewModel by viewModels()
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -38,7 +38,9 @@ class CartActivity : AppCompatActivity() {
 
         binding.tvTitleCart.text = title
         binding.tvDescCart.text = desc
-        binding.tvPriceCart.text = price
+        binding.tvPriceCart.text = "$ ${price}"
+        binding.tvTotal.text = "Total: $ ${price}"
+        binding.tvCountOrder.text = "1"
 
         Glide.with(binding.ivOrderCart)
             .load(img)
@@ -47,6 +49,19 @@ class CartActivity : AppCompatActivity() {
             .error(R.drawable.ic_launcher_foreground)
             .fallback(R.drawable.ic_launcher_foreground)
             .into(binding.ivOrderCart)
+
+        binding.ivAdd.setOnClickListener {
+            count = MathOperations.add(count)
+            binding.tvCountOrder.text = count.toString()
+            setTotal(Integer.parseInt(price))
+        }
+
+        binding.ivLess.setOnClickListener {
+            count = MathOperations.less(count)
+            binding.tvCountOrder.text = count.toString()
+            setTotal(Integer.parseInt(price))
+        }
+
     }
 
     override fun onBackPressed() {
@@ -55,4 +70,11 @@ class CartActivity : AppCompatActivity() {
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.stay)
     }
+
+    fun setTotal(price: Int) {
+        var total = count * price
+        binding.tvTotal.text = "Total: $ ${total}"
+    }
+
+
 }
