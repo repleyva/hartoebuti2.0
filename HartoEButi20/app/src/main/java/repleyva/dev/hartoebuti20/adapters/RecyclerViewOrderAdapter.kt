@@ -1,8 +1,6 @@
 package repleyva.dev.hartoebuti20.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
@@ -15,13 +13,11 @@ import repleyva.dev.hartoebuti20.databinding.ItemOrderBinding
 import repleyva.dev.hartoebuti20.model.OrderData
 import repleyva.dev.hartoebuti20.viewmodel.OrderViewModel
 
-class RecyclerViewAdapter(
+class RecyclerViewOrderAdapter(
     private val data: ArrayList<OrderData>,
-    val bindingMain: ActivityMainBinding,
     val orderViewModel: OrderViewModel
 ) :
-    RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
-
+    RecyclerView.Adapter<RecyclerViewOrderAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: OrderData) {

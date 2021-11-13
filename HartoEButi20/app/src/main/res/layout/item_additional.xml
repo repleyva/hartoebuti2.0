@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="listItemAdd"
+            type="repleyva.dev.hartoebuti20.model.OrderData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        app:cardBackgroundColor="@color/card_color"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <!--Item-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/ivImg"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_margin="10dp"
+                    app:loadImage="@{listItemAdd.img}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{listItemAdd.title}"
+                        android:textColor="@color/primary_color"
+                        android:textSize="@dimen/prices"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@{listItemAdd.desc}"
+                        android:textColor="@color/second_color"
+                        android:textColorHint="@color/second_color"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@{listItemAdd.price}"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/prices"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/linearCountOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_less_additional"
+                            style="@style/button_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/less" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center"
+                            android:textColor="@color/primary_color"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_add_additional"
+                            style="@style/button_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/add" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

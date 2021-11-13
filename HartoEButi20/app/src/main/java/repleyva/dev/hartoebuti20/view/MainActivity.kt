@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import repleyva.dev.hartoebuti20.R
-import repleyva.dev.hartoebuti20.adapters.RecyclerViewAdapter
+import repleyva.dev.hartoebuti20.adapters.RecyclerViewOrderAdapter
 import repleyva.dev.hartoebuti20.connection.ApiInterface
 import repleyva.dev.hartoebuti20.connection.ConnectionLiveData
 import repleyva.dev.hartoebuti20.databinding.ActivityMainBinding
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                 if (response?.body() != null) {
                     binding.progressLinear.setVisibility(View.GONE);
                     binding.recyclerOrders.adapter =
-                        RecyclerViewAdapter(response.body()!!, binding, orderViewModel)
+                        RecyclerViewOrderAdapter(response.body()!!, orderViewModel)
                     binding.recyclerOrders.layoutManager = manager
                 }
             }
