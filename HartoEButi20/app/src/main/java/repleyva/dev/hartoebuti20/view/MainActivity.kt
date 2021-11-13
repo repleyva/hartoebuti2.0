@@ -1,16 +1,19 @@
 package repleyva.dev.hartoebuti20.view
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import repleyva.dev.hartoebuti20.R
 import repleyva.dev.hartoebuti20.adapters.RecyclerViewAdapter
 import repleyva.dev.hartoebuti20.connection.ApiInterface
 import repleyva.dev.hartoebuti20.connection.ConnectionLiveData
@@ -21,14 +24,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import androidx.lifecycle.Observer
-import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     /*
     * TODO:
-    *  - implementar navigation
     *  - Ver crrito de compras
     *  */
 
@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     // inspeccionar el pedido
     private val orderViewModel: OrderViewModel by viewModels()
+
+    lateinit var order: OrderData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,15 +69,26 @@ class MainActivity : AppCompatActivity() {
         binding.btnCart.shrink()
 
         orderViewModel.order.observe(this, Observer {
+            order = OrderData(it?.title, it?.desc, it?.price, it?.img)
             binding.btnCart.text = "(hacer pedido) x1 ${it?.title}"
             binding.btnCart.extend()
         })
 
         binding.btnCart.setOnClickListener {
-            if (binding.btnCart.isExtended) {
+            if (binding.btnCart.isExtended && binding.btnCart.text == "") {
                 binding.btnCart.shrink()
             } else {
                 binding.btnCart.extend()
+                if (binding.btnCart.text != "") {
+                    val intent = Intent(applicationContext, CartActivity::class.java)
+                    intent.putExtra("title", order.title)
+                    intent.putExtra("desc", order.desc)
+                    intent.putExtra("price", order.price)
+                    intent.putExtra("img", order.img)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
+                }
             }
         }
 

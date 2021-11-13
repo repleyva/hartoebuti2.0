@@ -13,8 +13,9 @@ interface ApiInterface {
     fun getOrders(@Path("pedido") pedido: String): Call<ArrayList<OrderData>>
 
     companion object {
-
-        var BASE_URL = "http://192.168.38.244/api/"
+        // 192.168.101.7 Wifi
+        // 192.168.38.244 phone
+        var BASE_URL = "http://192.168.101.7/api/"
         private var INSTANCE = ApiInterface
 
         fun getInstance(): Companion {
