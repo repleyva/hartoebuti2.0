@@ -16,6 +16,7 @@ import repleyva.dev.hartoebuti20.viewmodel.OrderViewModel
 
 class RecyclerViewAddAdapter(
     private val data: ArrayList<OrderData>,
+    val orderViewModel: OrderViewModel
 ) :
     RecyclerView.Adapter<RecyclerViewAddAdapter.ViewHolder>() {
 
@@ -33,6 +34,13 @@ class RecyclerViewAddAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
+        /*holder.binding.ivAddAdditional.setOnClickListener {
+            orderViewModel.setAdd(holder.binding.listItemAdd)
+        }
+        holder.binding.ivLessAdditional.setOnClickListener {
+            orderViewModel.setLess(holder.binding.listItemAdd)
+        }*/
+
     }
 
     override fun getItemCount(): Int {

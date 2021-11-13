@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,6 +23,7 @@ import repleyva.dev.hartoebuti20.connection.ConnectionLiveData
 import repleyva.dev.hartoebuti20.databinding.ActivityCartBinding
 import repleyva.dev.hartoebuti20.helpers.MathOperations
 import repleyva.dev.hartoebuti20.model.OrderData
+import repleyva.dev.hartoebuti20.viewmodel.OrderViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,8 +34,16 @@ class CartActivity : AppCompatActivity() {
     lateinit var binding: ActivityCartBinding
     lateinit var manager: RecyclerView.LayoutManager
     var count: Int = 1
+    var countAdd: Int = 0
     // para chequear si hay coneccion a internet
     lateinit var connectionLiveData: ConnectionLiveData
+
+    lateinit var orderAdd: OrderData
+
+    // inspeccionar el pedido
+    private val orderViewModel: OrderViewModel by viewModels()
+
+    var total: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,14 +94,30 @@ class CartActivity : AppCompatActivity() {
         binding.ivAdd.setOnClickListener {
             count = MathOperations.add(count)
             binding.tvCountOrder.text = count.toString()
-            setTotal(Integer.parseInt(price))
+            setTotal(Integer.parseInt(price), count, 0)
         }
 
         binding.ivLess.setOnClickListener {
             count = MathOperations.less(count)
             binding.tvCountOrder.text = count.toString()
-            setTotal(Integer.parseInt(price))
+            setTotal(Integer.parseInt(price), count, 0)
         }
+
+        /*orderViewModel.orderAdd.observe(this, Observer {
+            orderAdd = OrderData(it?.title, it?.desc, it?.price, it?.img)
+            countAdd = MathOperations.add(countAdd)
+            var orderAddPrice = Integer.parseInt(orderAdd.price)
+            var priceAdditional = orderAddPrice?.times(countAdd!!)
+            setTotal(Integer.parseInt(price), count, priceAdditional)
+        })
+
+        orderViewModel.orderLess.observe(this, Observer {
+            orderAdd = OrderData(it?.title, it?.desc, it?.price, it?.img)
+            countAdd = MathOperations.less(countAdd)
+            var orderAddPrice = Integer.parseInt(orderAdd.price)
+            var priceAdditional = orderAddPrice * countAdd!!
+            setTotal(Integer.parseInt(price), count, priceAdditional)
+        }*/
 
     }
 
@@ -129,8 +156,8 @@ class CartActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.stay)
     }
 
-    fun setTotal(price: Int) {
-        var total = count * price
+    fun setTotal(price: Int, count: Int, additional: Int) {
+        total = count * price + additional
         binding.tvTotal.text = "Total: $ ${total}"
     }
 
@@ -146,7 +173,7 @@ class CartActivity : AppCompatActivity() {
                     binding.progressLinearAdd.setVisibility(View.GONE);
                     binding.recyclerAdditional.isNestedScrollingEnabled = false
                     binding.recyclerAdditional.adapter =
-                        RecyclerViewAddAdapter(response.body()!!)
+                        RecyclerViewAddAdapter(response.body()!!, orderViewModel)
                     binding.recyclerAdditional.layoutManager = manager
                 }
             }

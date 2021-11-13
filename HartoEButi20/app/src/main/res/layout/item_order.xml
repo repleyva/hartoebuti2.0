@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:backgroundTint="@color/main_color"
-                        android:text="comprar"></Button>
+                        android:text="comprar" />
 
                 </LinearLayout>
             </LinearLayout>
