@@ -4,20 +4,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import repleyva.dev.hartoebuti20.model.OrderData
 
-class OrderViewModel: ViewModel() {
+class OrderViewModel : ViewModel() {
     val order = MutableLiveData<OrderData?>()
-    /*val orderAdd = MutableLiveData<OrderData?>()
-    val orderLess = MutableLiveData<OrderData?>()*/
+    val orderIncAdd = MutableLiveData<OrderData?>()
+    val orderDecAdd = MutableLiveData<OrderData?>()
 
-    fun setOrderActually (order: OrderData?) {
+    fun setOrderActually(order: OrderData?) {
         this.order.postValue(order)
     }
 
-   /* fun setAdd (orderAdd: OrderData?) {
-        this.orderAdd.postValue(orderAdd)
+    fun setIncCountAdd(orderAdd: OrderData?) {
+        this.orderIncAdd.postValue(orderAdd)
     }
 
-    fun setLess (orderLess: OrderData?) {
-        this.orderLess.postValue(orderLess)
-    }*/
+    fun setDecCountAdd(orderLess: OrderData?) {
+        this.orderDecAdd.postValue(orderLess)
+    }
 }
