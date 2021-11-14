@@ -34,16 +34,22 @@ class CartActivity : AppCompatActivity() {
     lateinit var binding: ActivityCartBinding
     lateinit var manager: RecyclerView.LayoutManager
     var count: Int = 1
-    var countAdd: Int = 0
+
     // para chequear si hay coneccion a internet
     lateinit var connectionLiveData: ConnectionLiveData
 
     lateinit var orderAdd: OrderData
+    lateinit var orderLess: OrderData
+    var countAdd: Int = 0
+    var countLess: Int = 0
 
     // inspeccionar el pedido
     private val orderViewModel: OrderViewModel by viewModels()
 
     var total: Int = 0
+
+    var orderAddPrice: Int = 0
+    var priceAdditional: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +89,8 @@ class CartActivity : AppCompatActivity() {
         binding.tvTotal.text = "Total: $ ${price}"
         binding.tvCountOrder.text = "1"
 
+        total = Integer.parseInt(price)
+
         Glide.with(binding.ivOrderCart)
             .load(img)
             .circleCrop()
@@ -94,30 +102,35 @@ class CartActivity : AppCompatActivity() {
         binding.ivAdd.setOnClickListener {
             count = MathOperations.add(count)
             binding.tvCountOrder.text = count.toString()
-            setTotal(Integer.parseInt(price), count, 0)
+            total = count * Integer.parseInt(price)
+            binding.tvTotal.text = "Total: $ ${total}"
         }
 
         binding.ivLess.setOnClickListener {
             count = MathOperations.less(count)
             binding.tvCountOrder.text = count.toString()
-            setTotal(Integer.parseInt(price), count, 0)
+            total = count * Integer.parseInt(price)
+            binding.tvTotal.text = "Total: $ ${total}"
         }
 
-        /*orderViewModel.orderAdd.observe(this, Observer {
+        orderViewModel.orderIncAdd.observe(this, Observer {
             orderAdd = OrderData(it?.title, it?.desc, it?.price, it?.img)
             countAdd = MathOperations.add(countAdd)
-            var orderAddPrice = Integer.parseInt(orderAdd.price)
-            var priceAdditional = orderAddPrice?.times(countAdd!!)
-            setTotal(Integer.parseInt(price), count, priceAdditional)
+            orderAddPrice = Integer.parseInt(orderAdd.price)
+            priceAdditional = orderAddPrice * countAdd
+            total += priceAdditional
+            binding.tvTotal.text = "Total: $ ${total}"
         })
 
-        orderViewModel.orderLess.observe(this, Observer {
-            orderAdd = OrderData(it?.title, it?.desc, it?.price, it?.img)
-            countAdd = MathOperations.less(countAdd)
-            var orderAddPrice = Integer.parseInt(orderAdd.price)
-            var priceAdditional = orderAddPrice * countAdd!!
-            setTotal(Integer.parseInt(price), count, priceAdditional)
-        }*/
+        /*orderViewModel.orderDecAdd.observe(this, Observer {
+            orderLess = OrderData(it?.title, it?.desc, it?.price, it?.img)
+            if (orderAdd != null && orderLess.title == orderAdd.title) {
+                countAdd = MathOperations.less(countAdd)
+                priceAdditional = orderAddPrice * countAdd
+                total -= priceAdditional
+                binding.tvTotal.text = "Total: $ ${total}"
+            }
+        })*/
 
     }
 
@@ -154,11 +167,6 @@ class CartActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.stay)
-    }
-
-    fun setTotal(price: Int, count: Int, additional: Int) {
-        total = count * price + additional
-        binding.tvTotal.text = "Total: $ ${total}"
     }
 
     private fun getDataApi() {
