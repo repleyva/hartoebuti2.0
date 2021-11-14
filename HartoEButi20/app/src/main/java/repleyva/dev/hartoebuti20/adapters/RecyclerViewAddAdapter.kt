@@ -34,12 +34,12 @@ class RecyclerViewAddAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
-        /*holder.binding.ivAddAdditional.setOnClickListener {
-            orderViewModel.setAdd(holder.binding.listItemAdd)
+        holder.binding.btnAdd.setOnClickListener {
+            orderViewModel.setIncCountAdd(holder.binding.listItemAdd)
         }
-        holder.binding.ivLessAdditional.setOnClickListener {
-            orderViewModel.setLess(holder.binding.listItemAdd)
-        }*/
+        holder.binding.btnLess.setOnClickListener {
+            orderViewModel.setDecCountAdd(holder.binding.listItemAdd)
+        }
 
     }
 
